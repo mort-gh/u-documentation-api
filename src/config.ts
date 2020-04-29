@@ -2,6 +2,7 @@ import './lib/env';
 
 export const serviceConfig = {
   port: process.env.SERVICE_PORT || '3434',
+  allowHosts: (process.env.ALLOW_HOSTS || '').split(','),
 };
 
 export const githubApi = {

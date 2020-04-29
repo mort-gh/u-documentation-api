@@ -13,7 +13,7 @@ const app = fastify({ logger: loggerOptions, ignoreTrailingSlash: true });
 
 swagger.register(app);
 
-app.register(cors, { origin: ['http://212.90.63.72', 'http://176.36.161.102', 'http://31.172.136.127'] });
+app.register(cors, { origin: serviceConfig.allowHosts });
 
 routes.forEach(route => route(app));
 

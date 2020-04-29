@@ -3,6 +3,7 @@ FROM node:lts-slim
 ARG SERVICE_PORT
 
 ARG GIT_KEY
+ARG ALLOW_HOSTS
 
 ENV NODE_ENV=production
 ENV NODE_PATH=./build
