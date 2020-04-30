@@ -1,5 +1,5 @@
 import ApolloClient from 'apollo-client';
-import { InMemoryCache } from 'apollo-boost';
+import { InMemoryCache } from 'apollo-cache-inmemory';
 import { HttpLink } from 'apollo-link-http';
 import { setContext } from 'apollo-link-context';
 import fetch from 'isomorphic-fetch';
@@ -21,5 +21,5 @@ const link = authLink.concat(httpLink);
 
 export const client = new ApolloClient({
   link: link,
-  cache: new InMemoryCache(),
+  cache: new InMemoryCache,
 });

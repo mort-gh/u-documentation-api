@@ -16,6 +16,8 @@ export const getEntries: RequestHandler<
   console.log(path);
 
   try {
+    await client.resetStore();
+
     const { data }: { data: Entries } = await client.query({ query: getEntriesQuery({ owner, repo, branch, path }) });
 
     return (data.repository.object?.entries || []).map(entry => ({ name: entry.name, type: entry.type }));

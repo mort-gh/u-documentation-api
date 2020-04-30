@@ -13,6 +13,8 @@ export const getEntry: RequestHandler<
   never
 > = async ({ params: { owner, repo, branch, path, fileName } }) => {
   try {
+    await client.resetStore();
+
     const { data }: { data: Entry } = await client.query({
       query: getEntryQuery({
         owner,
