@@ -2,33 +2,28 @@ import fastify from 'fastify';
 
 import { getEntries, getEntry } from 'controllers/entries';
 
-import { object, string, array, mixed } from 'json-schemas/primitives';
+import { object, string, array } from 'json-schemas/primitives';
 
 import { generateSchemaForError, errorsMap } from 'utils';
 
 const tags = ['Entries'];
-const querystring = object({
-  properties: {
-    branch: string({ default: 'master' }),
-    path: string({ default: '' }),
-  },
-});
 
 export const entriesRoutes = (app: fastify.FastifyInstance): void => {
   app.get(
-    '/entries/:owner/:repo',
+    '/entries/:owner/:repo/:branch/:path',
     {
       schema: {
-        summary: 'List files and folders from path',
+        summary: 'List files and folders',
         tags,
         params: object({
-          required: ['owner', 'repo'],
+          required: ['owner', 'repo', 'branch', 'path'],
           properties: {
             owner: string(),
             repo: string(),
+            branch: string({ default: 'master' }),
+            path: string(),
           },
         }),
-        querystring,
         response: {
           200: array({
             description: 'Successful response',
@@ -48,23 +43,19 @@ export const entriesRoutes = (app: fastify.FastifyInstance): void => {
   );
 
   app.get(
-    '/entries/:owner/:repo/:fileName',
+    '/entries/:owner/:repo/:branch/:path/:fileName',
     {
       schema: {
         summary: 'Request to get the contents of a specific file',
         tags,
         params: object({
-          required: ['owner', 'repo'],
+          required: ['owner', 'repo', 'branch', 'path', 'fileName'],
           properties: {
             owner: string(),
             repo: string(),
-            fileName: string(),
-          },
-        }),
-        querystring: object({
-          properties: {
             branch: string({ default: 'master' }),
-            path: string({ default: '' }),
+            path: string(),
+            fileName: string(),
           },
         }),
         response: {

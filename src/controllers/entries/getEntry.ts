@@ -7,11 +7,11 @@ import { Entry } from '../../types/data';
 export const getEntry: RequestHandler<
   unknown,
   unknown,
-  { branch?: string; path?: string },
-  { owner: string; repo: string; fileName: string },
+  unknown,
+  { owner: string; repo: string; branch?: string; path?: string; fileName: string },
   undefined,
   never
-> = async ({ params: { owner, repo, fileName }, query: { branch, path } }) => {
+> = async ({ params: { owner, repo, branch, path, fileName } }) => {
   try {
     const { data }: { data: Entry } = await client.query({
       query: getEntryQuery({

@@ -8,11 +8,13 @@ import { Entries } from 'types/data';
 export const getEntries: RequestHandler<
   unknown,
   unknown,
-  { branch?: string; path?: string },
-  { owner: string; repo: string },
+  unknown,
+  { owner: string; repo: string; branch?: string; path?: string },
   undefined,
   never
-> = async ({ params: { owner, repo }, query: { branch, path } }) => {
+> = async ({ params: { owner, repo, branch, path } }) => {
+  console.log(path);
+
   try {
     const { data }: { data: Entries } = await client.query({ query: getEntriesQuery({ owner, repo, branch, path }) });
 
