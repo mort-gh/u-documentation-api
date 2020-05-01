@@ -16,7 +16,7 @@ export const getEntries: RequestHandler<
   console.log(path);
 
   try {
-    await client.resetStore();
+    await client.cache.reset();
 
     const { data }: { data: Entries } = await client.query({ query: getEntriesQuery({ owner, repo, branch, path }) });
 
