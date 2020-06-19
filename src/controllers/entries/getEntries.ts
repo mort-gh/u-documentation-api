@@ -13,8 +13,6 @@ export const getEntries: RequestHandler<
   undefined,
   never
 > = async ({ params: { owner, repo, branch, path } }) => {
-  console.log(path);
-
   try {
     await client.cache.reset();
 

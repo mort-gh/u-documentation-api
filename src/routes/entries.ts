@@ -21,7 +21,7 @@ export const entriesRoutes = (app: fastify.FastifyInstance): void => {
             owner: string(),
             repo: string(),
             branch: string({ default: 'master' }),
-            path: string(),
+            path: string({ description: 'Nested paths must be split with "%2F"' }),
           },
         }),
         response: {
@@ -54,7 +54,7 @@ export const entriesRoutes = (app: fastify.FastifyInstance): void => {
             owner: string(),
             repo: string(),
             branch: string({ default: 'master' }),
-            path: string(),
+            path: string({ description: 'Nested paths must be split with "%2F"' }),
             fileName: string(),
           },
         }),

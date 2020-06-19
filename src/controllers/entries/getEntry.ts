@@ -25,7 +25,7 @@ export const getEntry: RequestHandler<
       }),
     });
 
-    if (!data.repository.object) throw new Error('File not found or file in binary');
+    if (!data?.repository?.object) throw new Error('File not found or file in binary');
 
     return {
       content: data.repository.object?.text || null,
