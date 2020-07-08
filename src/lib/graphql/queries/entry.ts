@@ -17,7 +17,8 @@ export const getEntryQuery = ({
     repository(owner: "${owner}", name: "${repo}") {
       object(expression: "${branch}:${path}${path ? `/${fileName}` : fileName}") {
         ... on Blob{
-          text
+          text,
+          oid
         }
       }
     }

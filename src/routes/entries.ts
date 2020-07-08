@@ -64,6 +64,7 @@ export const entriesRoutes = (app: fastify.FastifyInstance): void => {
             required: ['content'],
             properties: {
               content: string(),
+              id: string(),
             },
           }),
           404: generateSchemaForError(errorsMap[404], 'Not found'),
