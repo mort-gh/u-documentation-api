@@ -6,21 +6,33 @@ export const getEntryQuery = ({
   branch = 'master',
   path = '',
   fileName,
+  additionalAttributes,
 }: {
   owner: string;
   repo: string;
   branch?: string;
   path?: string;
   fileName: string;
-}) => gql`
+  additionalAttributes?: string;
+}) => {
+  const parseAttributes = () => {
+    const parsedString = additionalAttributes && JSON.parse(additionalAttributes);
+
+    if (!Array.isArray(parsedString)) return [];
+
+    return parsedString;
+  };
+
+  return gql`
   {
     repository(owner: "${owner}", name: "${repo}") {
       object(expression: "${branch}:${path}${path ? `/${fileName}` : fileName}") {
         ... on Blob{
           text,
-          oid
+          ${[...parseAttributes()]}
         }
       }
     }
   }
 `;
+};

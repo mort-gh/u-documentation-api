@@ -7,11 +7,11 @@ import { Entry } from '../../types/data';
 export const getEntry: RequestHandler<
   unknown,
   unknown,
-  { needId: boolean },
+  { additionalAttributes: string },
   { owner: string; repo: string; branch?: string; path?: string; fileName: string },
   undefined,
   never
-> = async ({ params: { owner, repo, branch, path, fileName }, query: { needId } }) => {
+> = async ({ params: { owner, repo, branch, path, fileName }, query: { additionalAttributes } }) => {
   try {
     await client.cache.reset();
 
@@ -22,6 +22,7 @@ export const getEntry: RequestHandler<
         branch,
         path,
         fileName,
+        additionalAttributes,
       }),
     });
 
@@ -29,7 +30,7 @@ export const getEntry: RequestHandler<
 
     return {
       content: data.repository.object?.text || null,
-      id: needId ? data?.repository?.object?.oid : undefined,
+      ...data?.repository?.object,
     };
   } catch (error) {
     return errorBuilder(404, error.message);
