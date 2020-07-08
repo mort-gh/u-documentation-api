@@ -16,11 +16,11 @@ export const getEntryQuery = ({
   additionalAttributes?: string;
 }) => {
   const parseAttributes = () => {
-    const parsedString = additionalAttributes && JSON.parse(additionalAttributes);
+    const parsedAttributes = additionalAttributes && JSON.parse(additionalAttributes);
 
-    if (!Array.isArray(parsedString)) return [];
+    if (!Array.isArray(parsedAttributes)) return [];
 
-    return parsedString;
+    return parsedAttributes;
   };
 
   return gql`
