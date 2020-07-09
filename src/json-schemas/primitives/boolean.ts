@@ -1,5 +1,3 @@
-export const boolean = () => {
-  return {
-    type: 'boolean',
-  };
-};
+export const boolean = () => ({
+  type: 'boolean',
+});

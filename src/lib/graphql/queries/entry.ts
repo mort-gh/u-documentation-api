@@ -18,9 +18,7 @@ export const getEntryQuery = ({
   const parseAttributes = () => {
     const parsedAttributes = additionalAttributes && JSON.parse(additionalAttributes);
 
-    if (!Array.isArray(parsedAttributes)) return [];
-
-    return parsedAttributes;
+    return Array.isArray(parsedAttributes) ? parsedAttributes : [];
   };
 
   return gql`
