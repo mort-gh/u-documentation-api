@@ -58,6 +58,11 @@ export const entriesRoutes = (app: fastify.FastifyInstance): void => {
             fileName: string(),
           },
         }),
+        querystring: object({
+          properties: {
+            additionalAttributes: string({ description: 'Encoded array like %B"oid"%2C"commitUrl"%5D' }),
+          },
+        }),
         response: {
           200: object({
             description: 'Successful response',
