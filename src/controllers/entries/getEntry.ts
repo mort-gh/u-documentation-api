@@ -26,13 +26,13 @@ export const getEntry: RequestHandler<
       }),
     });
 
-    if (!data?.repository?.object) throw new Error('File not found or file in binary');
+    if (!data?.repository?.object) throw errorBuilder(404, 'File not found or file in binary');
 
     return {
       content: data.repository.object?.text || null,
       ...data?.repository?.object,
     };
   } catch (error) {
-    return errorBuilder(404, error.message);
+    return error;
   }
 };

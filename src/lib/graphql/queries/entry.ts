@@ -1,4 +1,5 @@
 import gql from 'graphql-tag';
+import errorBuilder from '../../error-builder';
 
 export const getEntryQuery = ({
   owner,
@@ -16,9 +17,13 @@ export const getEntryQuery = ({
   additionalAttributes?: string;
 }) => {
   const parseAttributes = () => {
-    const parsedAttributes = additionalAttributes && JSON.parse(additionalAttributes);
+    try {
+      const parsedAttributes = additionalAttributes && JSON.parse(additionalAttributes);
 
-    return Array.isArray(parsedAttributes) ? parsedAttributes : [];
+      return Array.isArray(parsedAttributes) ? parsedAttributes : [];
+    } catch (error) {
+      throw errorBuilder(400, "Incorrect query parameter 'additionalAttributes' ");
+    }
   };
 
   return gql`
