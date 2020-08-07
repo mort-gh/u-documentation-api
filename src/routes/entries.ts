@@ -2,7 +2,7 @@ import fastify from 'fastify';
 
 import { getEntries, getEntry } from 'controllers/entries';
 
-import { object, string, array } from 'json-schemas/primitives';
+import { object, string, array, numeric, boolean } from 'json-schemas/primitives';
 
 import { generateSchemaForError, errorsMap } from 'utils';
 
@@ -58,12 +58,25 @@ export const entriesRoutes = (app: fastify.FastifyInstance): void => {
             fileName: string(),
           },
         }),
+        querystring: object({
+          properties: {
+            additionalAttributes: string({ description: 'Encoded array like %B"oid"%2C"commitUrl"%5D' }),
+          },
+        }),
         response: {
           200: object({
             description: 'Successful response',
             required: ['content'],
             properties: {
               content: string(),
+              abbreviatedOid: string(),
+              byteSize: numeric(),
+              commitResourcePath: string(),
+              commitUrl: string(),
+              id: string(),
+              isBinary: boolean(),
+              isTruncated: boolean(),
+              oid: string(),
             },
           }),
           404: generateSchemaForError(errorsMap[404], 'Not found'),
