@@ -32,7 +32,7 @@ export const getEntryQuery = ({
       object(expression: "${branch}:${path}${path ? `/${fileName}` : fileName}") {
         ... on Blob{
           text,
-          ${[...parseAttributes()]}
+          ${parseAttributes()}
         }
       }
     }
