@@ -9,7 +9,7 @@ import routes from 'routes';
 
 import { serviceConfig } from 'config';
 
-const app = fastify({ logger: loggerOptions, ignoreTrailingSlash: true });
+const app = fastify({ logger: loggerOptions, ignoreTrailingSlash: true, maxParamLength: 1000 });
 
 swagger.register(app);
 
