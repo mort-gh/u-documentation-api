@@ -1,21 +1,33 @@
 {
   "root": true,
   "env": {
-    "node": true
+    "node": true,
+    "es6": true
   },
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "sourceType": "module"
+    "sourceType": "module",
+    "project": "./tsconfig.json"
   },
   "plugins": [
-    "@typescript-eslint"
+    "@typescript-eslint",
+    "boundaries",
+    "immutable",
+    "import",
+    "prettier",
+    "promise",
+    "sonarjs"
   ],
   "extends": [
-    "eslint:recommended",
-    "plugin:@typescript-eslint/eslint-recommended",
+    "airbnb",
+    "plugin:import/typescript",
+    "plugin:sonarjs/recommended",
+    "plugin:promise/recommended",
+    "plugin:unicorn/recommended",
     "plugin:@typescript-eslint/recommended",
-    "plugin:prettier/recommended",
-    "prettier/@typescript-eslint"
+    "prettier/@typescript-eslint",
+    "plugin:import/typescript",
+    "plugin:prettier/recommended"
   ],
   "settings": {
     "import/resolver": {
@@ -28,20 +40,72 @@
     }
   },
   "rules": {
-    "@typescript-eslint/ban-ts-ignore": "warn",
-    "@typescript-eslint/interface-name-prefix": "off",
-    "@typescript-eslint/explicit-function-return-type": "off",
-    "@typescript-eslint/member-ordering": "warn",
-    "@typescript-eslint/no-unused-vars": "warn",
-    "import/named": "off",
+    "@typescript-eslint/no-empty-interface": [
+      "warn"
+    ],
+    "@typescript-eslint/no-use-before-define": [
+      "error"
+    ],
+    "@typescript-eslint/ban-ts-comment": "off",
+    "@typescript-eslint/member-ordering": "error",
+    "@typescript-eslint/generic-type-naming": "off",
+    "@typescript-eslint/no-base-to-string": "off",
+    "@typescript-eslint/unbound-method": "off",
+    "@typescript-eslint/no-unnecessary-condition": "warn",
+    "@typescript-eslint/explicit-member-accessibility": "error",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "@typescript-eslint/no-var-requires": "off",
+    "@typescript-eslint/no-shadow": "error",
+    "@typescript-eslint/ban-types": [
+      "error",
+      {
+        "types": {
+          "{}": false,
+          "object": false
+        }
+      }
+    ],
+    "immutable/no-let": "error",
+    "immutable/no-mutation": "warn",
     "import/extensions": "off",
     "import/prefer-default-export": "off",
-    "no-console": "off",
-    "no-restricted-globals": "off",
-    "no-empty-function": "warn",
-    "no-unused-vars": "off",
-    "no-useless-constructor": "off",
+    "import/no-cycle": "error",
+    "import/no-named-as-default": "off",
+    "import/no-extraneous-dependencies": "off",
+    "import/no-named-as-default-member": "off",
     "prettier/prettier": "warn",
-    "spaced-comment": "warn"
+    "unicorn/consistent-function-scoping": "warn",
+    "unicorn/no-useless-undefined": "off",
+    "unicorn/no-null": "off",
+    "unicorn/prevent-abbreviations": "off",
+    "unicorn/no-fn-reference-in-iterator": "off",
+    "unicorn/filename-case": [
+      "error",
+      {
+        "case": "kebabCase"
+      }
+    ],
+    "unicorn/no-reduce": "off",
+    "unicorn/prefer-includes": "off",
+    "sonarjs/no-duplicate-string": "warn",
+    "no-process-env": "off",
+    "id-length": [
+      "warn",
+      {
+        "exceptions": [
+          "_"
+        ]
+      }
+    ],
+    "no-console": "warn",
+    "no-underscore-dangle": "off",
+    "sort-imports": "off",
+    "no-useless-constructor": "off",
+    "class-methods-use-this": "off",
+    "max-classes-per-file": "off",
+    "global-require": "off",
+    "consistent-return": "warn",
+    "no-use-before-define": "off",
+    "no-shadow": "off"
   }
 }

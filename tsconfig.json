@@ -1,22 +1,37 @@
 {
   "compilerOptions": {
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
-    "module": "commonjs",
     "target": "es6",
+    "module": "commonjs",
     "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "strict": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
+    "baseUrl": "src",
+    "typeRoots": [
+      "./src/types"
+    ],
     "outDir": "build",
-    "baseUrl": "src"
+    "strict": true,
+    "noEmit": true,
+    "allowJs": true,
+    "skipLibCheck": true,
+    "noImplicitAny": true,
+    "noUnusedLocals": true,
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "strictNullChecks": true,
+    "resolveJsonModule": true,
+    "noUnusedParameters": true,
+    "downlevelIteration": true,
+    "strictFunctionTypes": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true
   },
-  "include": [
-    "src"
-  ],
   "exclude": [
     "node_modules",
-    "build"
+    "build",
+    "**/*.spec.ts"
+  ],
+  "include": [
+    "**/*.ts"
   ]
 }
