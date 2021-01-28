@@ -1,15 +1,11 @@
 export interface Entry {
-  repository: {
-    object?: {
-      text: string;
-      abbreviatedOid?: string;
-      byteSize?: number;
-      commitResourcePath?: string;
-      commitUrl?: string;
-      id?: string;
-      isBinary?: boolean;
-      isTruncated?: boolean;
-      oid?: string;
-    };
-  };
+  text: string;
+  commitResourcePath?: string;
+  abbreviatedOid?: string;
+  isTruncated?: boolean;
+  commitUrl?: string;
+  isBinary?: boolean;
+  byteSize?: number;
+  oid?: string;
+  id?: string;
 }

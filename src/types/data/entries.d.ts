@@ -1,10 +1,8 @@
+interface EntryData {
+  name: string;
+  type: string;
+}
+
 export interface Entries {
-  repository: {
-    object?: {
-      entries: {
-        name: string;
-        type: string;
-      }[];
-    };
-  };
+  entries: Array<EntryData>;
 }
