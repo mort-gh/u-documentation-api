@@ -1,13 +1,13 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 
+import { GraphqlResponse } from '../types';
 import { GraphqlService } from '../graphql';
 import { Entries, Entry } from '../types/data';
-import { errorBuilder } from '../lib/error-builder';
 import { getEntriesQuery, getEntryQuery } from '../graphql/queries';
 
 @Injectable()
 export class EntriesService {
-  constructor(private readonly graphql: GraphqlService) {}
+  public constructor(private readonly graphql: GraphqlService) {}
 
   public async getEntries(owner: string, repo: string, branch: string, path: string) {
     try {
@@ -15,11 +15,13 @@ export class EntriesService {
 
       await client.cache.reset();
 
-      const { data }: { data: Entries } = await client.query({ query: getEntriesQuery({ owner, repo, branch, path }) });
+      const { data }: { data: GraphqlResponse<Entries> } = await client.query({
+        query: getEntriesQuery({ owner, repo, branch, path }),
+      });
 
-      return (data.repository.object?.entries || []).map(entry => ({ name: entry.name, type: entry.type }));
-    } catch (error) {
-      return errorBuilder(404, error.message);
+      return (data.repository.object?.entries || []).map((entry) => ({ name: entry.name, type: entry.type }));
+    } catch ({ message }) {
+      return new HttpException(message, HttpStatus.NOT_FOUND);
     }
   }
 
@@ -29,7 +31,7 @@ export class EntriesService {
 
       await client.cache.reset();
 
-      const { data }: { data: Entry } = await client.query({
+      const { data }: { data: GraphqlResponse<Entry> } = await client.query({
         query: getEntryQuery({
           owner,
           repo,
@@ -40,15 +42,15 @@ export class EntriesService {
       });
 
       if (!data?.repository?.object) {
-        return errorBuilder(404, 'File not found or file in binary');
+        return new HttpException('File not found or file in binary', 404);
       }
 
       return {
         content: data.repository.object?.text || null,
         ...data?.repository?.object,
       };
-    } catch (error) {
-      return errorBuilder(404, error.message);
+    } catch ({ message }) {
+      return new HttpException(message, HttpStatus.NOT_FOUND);
     }
   }
 }

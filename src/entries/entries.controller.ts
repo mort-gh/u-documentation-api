@@ -4,10 +4,10 @@ import { EntriesService } from './entries.service';
 
 @Controller('/entries/:owner/:repo/:branch/:path')
 export class EntriesController {
-  constructor(private readonly entries: EntriesService) {}
+  public constructor(private readonly entries: EntriesService) {}
 
   @Get()
-  getAll(
+  public getAll(
     @Param('repo') repo: string,
     @Param('path') path: string,
     @Param('owner') owner: string,
@@ -17,7 +17,7 @@ export class EntriesController {
   }
 
   @Get(':fileName')
-  getOne(
+  public getOne(
     @Param('repo') repo: string,
     @Param('path') path: string,
     @Param('owner') owner: string,

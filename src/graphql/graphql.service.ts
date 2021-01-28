@@ -24,6 +24,7 @@ export class GraphqlService {
       };
     });
 
+    /* eslint-disable unicorn/prefer-spread */
     const link = authLink.concat(this.httpLink);
     const cache = new InMemoryCache();
 
