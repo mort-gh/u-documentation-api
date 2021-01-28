@@ -11,8 +11,7 @@
     "lint": "eslint --quiet --color \"src/**/*.ts\"",
     "typecheck": "tsc -p ./tsconfig.json",
     "build": "yarn clear && tsc --diagnostics",
-    "clear": "rimraf build",
-    "autofix": "eslint --fix --quiet -c .eslintrc.json --ext .ts src/"
+    "clear": "rimraf build"
   },
   "dependencies": {
     "rxjs": "^6.6.3",
